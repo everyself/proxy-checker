@@ -25,19 +25,19 @@ async def check_proxy(proxy: str):
 
             async with session.get(TEST_URL) as response:
                 if response.status == 200:
-                    print(f"[✅] Работает: {proxy}")
+                    print(f"[✅] Works: {proxy}")
                 else:
-                    print(f"[⚠] Ответ {response.status}: {proxy}")
+                    print(f"[⚠] Answer {response.status}: {proxy}")
 
     except Exception as e:
-        print(f"[❌] Не работает: {proxy}")
+        print(f"[❌] Not working: {proxy}")
         print(f"     {type(e).__name__}: {e}")
 
 
 async def main():
-    print("Вставьте прокси (по одному в строке).")
-    print("Поддерживаются HTTP и SOCKS5.")
-    print("Когда закончите — нажмите Enter на пустой строке.\n")
+    print("Enter the proxies (one per line).")
+    print("HTTP and SOCKS5 are supported.")
+    print("When you are finished, press Enter on an empty line.\n")
 
     proxies = []
 
@@ -50,10 +50,10 @@ async def main():
         proxies.append(proxy)
 
     if not proxies:
-        print("Прокси не введены.")
+        print("No proxies entered.")
         return
 
-    print(f"\nПроверяю {len(proxies)} прокси...\n")
+    print(f"\nChecking {len(proxies)} proxy...\n")
 
     tasks = [check_proxy(proxy) for proxy in proxies]
     await asyncio.gather(*tasks)
